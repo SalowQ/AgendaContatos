@@ -1,5 +1,7 @@
 ﻿using AgendaContatos.Application.UseCases.Contacts.Create;
 using AgendaContatos.Communication.Requests;
+using AgendaContatos.Communication.Responses;
+using AgendaContatos.Exception.ExceptionBase;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaContatos.Api.Controllers
@@ -17,13 +19,15 @@ namespace AgendaContatos.Api.Controllers
                 var response = useCase.Execute(request);
                 return Created(string.Empty, response);
             }
-            catch (ArgumentException ex)
+            catch (ErrorOnValidationException ex)
             {
-                return BadRequest(ex.Message);
+                var errorResponse = new ResponseErrorJson(ex.Errors);
+                return BadRequest(errorResponse);
             }
             catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Erro inesperado.");
+                var errorResponse = new ResponseErrorJson("Erro inesperado.");
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
 
         }
