@@ -1,4 +1,5 @@
-﻿using AgendaContatos.Communication.Requests;
+﻿using AgendaContatos.Application.UseCases.Contacts.Create;
+using AgendaContatos.Communication.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaContatos.Api.Controllers
@@ -8,11 +9,11 @@ namespace AgendaContatos.Api.Controllers
     public class ContactsController : ControllerBase
     {
         [HttpPost]
-        public IActionResult CreateContact([FromBody] RequestContactJson request)
+        public IActionResult Create([FromBody] RequestCreateContactJson request)
         {
-            // Here you would typically add logic to save the contact to a database
-            // For this example, we will just return a success message
-            return Created();
+            var useCase = new CreateContactUseCase();
+            var response = useCase.Execute(request);
+            return Created(string.Empty, response);
         }
     }
 }
