@@ -11,9 +11,21 @@ namespace AgendaContatos.Api.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] RequestCreateContactJson request)
         {
-            var useCase = new CreateContactUseCase();
-            var response = useCase.Execute(request);
-            return Created(string.Empty, response);
+            try
+            {
+                var useCase = new CreateContactUseCase();
+                var response = useCase.Execute(request);
+                return Created(string.Empty, response);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro inesperado.");
+            }
+
         }
     }
 }
