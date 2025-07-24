@@ -1,4 +1,5 @@
 ﻿using AgendaContatos.Communication.Responses;
+using AgendaContatos.Exception;
 using AgendaContatos.Exception.ExceptionBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -37,7 +38,7 @@ namespace AgendaContatos.Api.Filters
         }
         private void ThrowUnknowError(ExceptionContext context)
         {
-            var errorResponse = new ResponseErrorJson("Erro inesperado.");
+            var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Result = new ObjectResult(errorResponse);
         }
