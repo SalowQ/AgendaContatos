@@ -36,5 +36,41 @@ namespace Validators.Tests.Contacts.Create
                 () => result.Errors[1].ErrorMessage.ShouldBe(ResourceErrorMessages.NAME_MINIMUM)
             );
         }
+
+        [Fact]
+        public void Error_Phone_Empty()
+        {
+            //Arrange
+            var validator = new CreateContactValidator();
+            var request = RequestCreateContactJsonBuilder.Build();
+            request.ContactPhone = string.Empty;
+            //Act
+            var result = validator.Validate(request);
+            //Assert
+            result.IsValid.ShouldBe(false);
+            result.Errors.ShouldSatisfyAllConditions(
+                () => result.Errors.Count.ShouldBe(2),
+                () => result.Errors[0].ErrorMessage.ShouldBe(ResourceErrorMessages.PHONE_REQUIRED),
+                () => result.Errors[1].ErrorMessage.ShouldBe(ResourceErrorMessages.PHONE_INVALID)
+            );
+        }
+
+        [Fact]
+        public void Error_Email_Empty()
+        {
+            //Arrange
+            var validator = new CreateContactValidator();
+            var request = RequestCreateContactJsonBuilder.Build();
+            request.ContactEmail = string.Empty;
+            //Act
+            var result = validator.Validate(request);
+            //Assert
+            result.IsValid.ShouldBe(false);
+            result.Errors.ShouldSatisfyAllConditions(
+                () => result.Errors.Count.ShouldBe(2),
+                () => result.Errors[0].ErrorMessage.ShouldBe(ResourceErrorMessages.EMAIL_REQUIRED),
+                () => result.Errors[1].ErrorMessage.ShouldBe(ResourceErrorMessages.EMAIL_INVALID)
+            );
+        }
     }
 }
