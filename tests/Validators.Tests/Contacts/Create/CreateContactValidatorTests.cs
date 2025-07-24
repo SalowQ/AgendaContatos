@@ -8,7 +8,7 @@ namespace Validators.Tests.Contacts.Create
     public class CreateContactValidatorTests
     {
         [Fact]
-        public void Sucess()
+        public void Success()
         {
             //Arrange
             var validator = new CreateContactValidator();
