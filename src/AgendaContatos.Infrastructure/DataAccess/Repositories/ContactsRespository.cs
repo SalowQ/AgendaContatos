@@ -5,11 +5,15 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
 {
     internal class ContactsRespository : IContactsRepository
     {
+        private readonly AgendaContatosDbContext _dbContext;
+        public ContactsRespository(AgendaContatosDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void Add(Contact contact)
         {
-            var dbContext = new AgendaContatosDbContext();
-            dbContext.Contacts.Add(contact);
-            dbContext.SaveChanges();
+            _dbContext.Contacts.Add(contact);
+            _dbContext.SaveChanges();
         }
     }
 }
