@@ -5,13 +5,7 @@ namespace AgendaContatos.Infrastructure.DataAccess
 {
     internal class AgendaContatosDbContext : DbContext
     {
+        public AgendaContatosDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Contact> Contacts { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = "Server=localhost;Database=agendacontatosdb;Uid=root;Pwd=@password123;";
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 11));
-            optionsBuilder.UseMySql(connectionString, serverVersion);
-        }
     }
 }
