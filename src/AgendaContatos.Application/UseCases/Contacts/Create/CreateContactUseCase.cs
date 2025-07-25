@@ -9,6 +9,12 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
         public ResponseCreatedContactJson Execute(RequestCreateContactJson request)
         {
             Validate(request);
+            var entity = new Domain.Entities.Contact
+            {
+                Name = request.ContactName,
+                Email = request.ContactEmail,
+                Phone = request.ContactPhone,
+            };
             return new ResponseCreatedContactJson();
         }
 
