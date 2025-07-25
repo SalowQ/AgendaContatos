@@ -1,4 +1,5 @@
-﻿using AgendaContatos.Domain.Repositories.Contacts;
+﻿using AgendaContatos.Domain.Repositories;
+using AgendaContatos.Domain.Repositories.Contacts;
 using AgendaContatos.Infrastructure.DataAccess;
 using AgendaContatos.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace AgendaContatos.Infrastructure
 
         private static void AddRepositories(IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IContactsRepository, ContactsRespository>();
         }
 

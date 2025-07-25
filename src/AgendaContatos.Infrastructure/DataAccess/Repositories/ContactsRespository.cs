@@ -13,7 +13,6 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
         public void Add(Contact contact)
         {
             _dbContext.Contacts.Add(contact);
-            _dbContext.SaveChanges();
         }
     }
 }

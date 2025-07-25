@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
+using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Contacts;
 using AgendaContatos.Exception.ExceptionBase;
 
@@ -9,9 +10,11 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
     {
 
     private readonly IContactsRepository _repository;
-    public CreateContactUseCase(IContactsRepository repository)
+    private readonly IUnitOfWork _unitOfWork;
+    public CreateContactUseCase(IContactsRepository repository, IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
     public ResponseCreatedContactJson Execute(RequestCreateContactJson request)
         {
@@ -23,6 +26,7 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
                 Phone = request.ContactPhone,
             };
         _repository.Add(entity);
+        _unitOfWork.Commit();
         return new ResponseCreatedContactJson();
         }
 
