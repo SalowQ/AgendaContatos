@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaContatos.Infrastructure.DataAccess
 {
-    public class AgendaContatosDbContext : DbContext
+    internal class AgendaContatosDbContext : DbContext
     {
         public DbSet<Contact> Contacts { get; set; }
 
