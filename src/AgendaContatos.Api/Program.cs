@@ -1,5 +1,6 @@
 using AgendaContatos.Api.Filters;
 using AgendaContatos.Api.Middleware;
+using AgendaContatos.Application;
 using AgendaContatos.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 

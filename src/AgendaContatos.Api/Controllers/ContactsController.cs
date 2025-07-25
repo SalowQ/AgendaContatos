@@ -11,9 +11,8 @@ namespace AgendaContatos.Api.Controllers
     public class ContactsController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Create([FromBody] RequestCreateContactJson request)
+        public IActionResult Create([FromServices]ICreateContactUseCase useCase, [FromBody] RequestCreateContactJson request)
         {
-                var useCase = new CreateContactUseCase();
                 var response = useCase.Execute(request);
                 return Created(string.Empty, response);
         }
