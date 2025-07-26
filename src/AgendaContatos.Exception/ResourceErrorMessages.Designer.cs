@@ -61,6 +61,15 @@ namespace AgendaContatos.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Contato não encontrado..
+        /// </summary>
+        public static string CONTACT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONTACT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail inválido..
         /// </summary>
         public static string EMAIL_INVALID {

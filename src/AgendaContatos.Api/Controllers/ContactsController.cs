@@ -41,13 +41,8 @@ namespace AgendaContatos.Api.Controllers
         public async Task<IActionResult> GetById([FromServices] IGetContactByIdUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
-
-            if (response != null)
-            {
                 return Ok(response);
-            }
 
-            return NotFound();
         }
     }
 }
