@@ -5,6 +5,6 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create
 {
     public interface ICreateContactUseCase
     {
-        ResponseCreatedContactJson Execute(RequestCreateContactJson request);
+        Task<ResponseCreatedContactJson> Execute(RequestCreateContactJson request);
     }
 }

@@ -10,9 +10,9 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
-        public void Add(Contact contact)
+        public async Task Add(Contact contact)
         {
-            _dbContext.Contacts.Add(contact);
+            await _dbContext.Contacts.AddAsync(contact);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace AgendaContatos.Domain.Repositories.Contacts
 {
     public interface IContactsRepository
     {
-        void Add(Contact contact);
+        Task Add(Contact contact);
     }
 }
