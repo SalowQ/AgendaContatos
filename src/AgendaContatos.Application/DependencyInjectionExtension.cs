@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Application.AutoMapper;
 using AgendaContatos.Application.UseCases.Contacts.Create;
+using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AgendaContatos.Application
@@ -20,6 +21,7 @@ namespace AgendaContatos.Application
         private static void AddUseCases(IServiceCollection services)
         {
             services.AddScoped<ICreateContactUseCase, CreateContactUseCase>();
+            services.AddScoped<IGetAllContactsUseCase, GetAllContactsUseCase>();
         }
     }
 }

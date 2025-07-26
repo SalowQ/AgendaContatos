@@ -21,6 +21,7 @@ namespace AgendaContatos.Application.AutoMapper
         private void EntityToResponse()
         {
             CreateMap<Contact, ResponseCreatedContactJson>();
+            CreateMap<Contact, ResponseContactJson>();
         }
     }
 }

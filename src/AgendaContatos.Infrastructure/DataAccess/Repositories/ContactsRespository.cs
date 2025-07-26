@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Domain.Entities;
 using AgendaContatos.Domain.Repositories.Contacts;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendaContatos.Infrastructure.DataAccess.Repositories
 {
@@ -13,6 +14,11 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
         public async Task Add(Contact contact)
         {
             await _dbContext.Contacts.AddAsync(contact);
+        }
+
+        public async Task<List<Contact>> GetAll()
+        {
+            return await _dbContext.Contacts.ToListAsync();
         }
     }
 }
