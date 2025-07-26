@@ -18,7 +18,7 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Contact>> GetAll()
         {
-            return await _dbContext.Contacts.ToListAsync();
+            return await _dbContext.Contacts.AsNoTracking().ToListAsync();
         }
     }
 }
