@@ -6,5 +6,6 @@ namespace AgendaContatos.Domain.Repositories.Contacts
     {
         Task Add(Contact contact);
         Task<List<Contact>> GetAll();
+        Task<Contact?> GetById(long id);
     }
 }

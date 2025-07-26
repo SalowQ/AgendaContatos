@@ -11,6 +11,7 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
+
         public async Task Add(Contact contact)
         {
             await _dbContext.Contacts.AddAsync(contact);
@@ -19,6 +20,11 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
         public async Task<List<Contact>> GetAll()
         {
             return await _dbContext.Contacts.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<Contact?> GetById(long id)
+        {
+            return await _dbContext.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }
