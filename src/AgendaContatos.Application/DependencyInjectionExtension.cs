@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Application.AutoMapper;
 using AgendaContatos.Application.UseCases.Contacts.Create;
+using AgendaContatos.Application.UseCases.Contacts.Delete;
 using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
 using AgendaContatos.Application.UseCases.Contacts.GetContactById;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ namespace AgendaContatos.Application
             services.AddScoped<ICreateContactUseCase, CreateContactUseCase>();
             services.AddScoped<IGetAllContactsUseCase, GetAllContactsUseCase>();
             services.AddScoped<IGetContactByIdUseCase, GetContactByIdUseCase>();
+            services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
         }
     }
 }

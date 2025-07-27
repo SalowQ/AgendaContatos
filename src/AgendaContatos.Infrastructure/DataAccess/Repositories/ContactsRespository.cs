@@ -17,6 +17,17 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
             await _dbContext.Contacts.AddAsync(contact);
         }
 
+        public async Task<bool> Delete(long id)
+        {
+            var result = await _dbContext.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
+            if (result == null)
+            {
+                return false;
+            }
+            _dbContext.Contacts.Remove(result);
+            return true;
+        }
+
         public async Task<List<Contact>> GetAll()
         {
             return await _dbContext.Contacts.AsNoTracking().ToListAsync();

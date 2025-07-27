@@ -1,4 +1,5 @@
 ﻿using AgendaContatos.Application.UseCases.Contacts.Create;
+using AgendaContatos.Application.UseCases.Contacts.Delete;
 using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
 using AgendaContatos.Application.UseCases.Contacts.GetContactById;
 using AgendaContatos.Communication.Requests;
@@ -41,7 +42,18 @@ namespace AgendaContatos.Api.Controllers
         public async Task<IActionResult> GetById([FromServices] IGetContactByIdUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
-                return Ok(response);
+            return Ok(response);
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteContactUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+            return NoContent();
 
         }
     }
