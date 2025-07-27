@@ -8,10 +8,10 @@ namespace AgendaContatos.Application.UseCases.Contacts.GetContactById
 {
     public class GetContactByIdUseCase : IGetContactByIdUseCase
     {
-        private readonly IContactsRepository _repository;
+        private readonly IContactsReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetContactByIdUseCase(IContactsRepository repository, IMapper mapper)
+        public GetContactByIdUseCase(IContactsReadOnlyRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

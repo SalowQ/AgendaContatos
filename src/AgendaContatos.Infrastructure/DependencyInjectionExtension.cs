@@ -20,7 +20,8 @@ namespace AgendaContatos.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IContactsRepository, ContactsRespository>();
+            services.AddScoped<IContactsReadOnlyRepository, ContactsRespository>();
+            services.AddScoped<IContactsWriteOnlyRepository, ContactsRespository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

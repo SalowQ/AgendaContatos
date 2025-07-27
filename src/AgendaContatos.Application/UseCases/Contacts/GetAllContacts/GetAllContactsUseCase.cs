@@ -6,10 +6,10 @@ namespace AgendaContatos.Application.UseCases.Contacts.GetAllContacts
 {
     public class GetAllContactsUseCase : IGetAllContactsUseCase
     {
-        private readonly IContactsRepository _repository;
+        private readonly IContactsReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetAllContactsUseCase(IContactsRepository repository, IMapper mapper)
+        public GetAllContactsUseCase(IContactsReadOnlyRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

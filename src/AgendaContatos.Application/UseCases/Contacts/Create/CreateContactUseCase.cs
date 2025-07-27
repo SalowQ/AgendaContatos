@@ -11,10 +11,10 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
     public class CreateContactUseCase : ICreateContactUseCase
     {
 
-    private readonly IContactsRepository _repository;
+    private readonly IContactsWriteOnlyRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public CreateContactUseCase(IContactsRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateContactUseCase(IContactsWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;

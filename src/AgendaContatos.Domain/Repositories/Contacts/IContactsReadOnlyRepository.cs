@@ -2,9 +2,8 @@
 
 namespace AgendaContatos.Domain.Repositories.Contacts
 {
-    public interface IContactsRepository
+    public interface IContactsReadOnlyRepository
     {
-        Task Add(Contact contact);
         Task<List<Contact>> GetAll();
         Task<Contact?> GetById(long id);
     }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaContatos.Infrastructure.DataAccess.Repositories
 {
-    internal class ContactsRespository : IContactsRepository
+    internal class ContactsRespository : IContactsReadOnlyRepository, IContactsWriteOnlyRepository
     {
         private readonly AgendaContatosDbContext _dbContext;
         public ContactsRespository(AgendaContatosDbContext dbContext)
