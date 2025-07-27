@@ -1,4 +1,4 @@
-﻿using AgendaContatos.Application.UseCases.Contacts.Create;
+﻿using AgendaContatos.Application.UseCases.Contacts;
 using AgendaContatos.Exception;
 using CommonTestUtilities.Requests;
 using Shouldly;
@@ -11,7 +11,7 @@ namespace Validators.Tests.Contacts.Create
         public void Success()
         {
             //Arrange
-            var validator = new CreateContactValidator();
+            var validator = new ContactValidator();
             var request = RequestCreateContactJsonBuilder.Build();
             //Act
             var result = validator.Validate(request);
@@ -23,9 +23,9 @@ namespace Validators.Tests.Contacts.Create
         public void Error_Name_Empty()
         {
             //Arrange
-            var validator = new CreateContactValidator();
+            var validator = new ContactValidator();
             var request = RequestCreateContactJsonBuilder.Build();
-            request.ContactName = string.Empty;
+            request.Name = string.Empty;
             //Act
             var result = validator.Validate(request);
             //Assert
@@ -41,9 +41,9 @@ namespace Validators.Tests.Contacts.Create
         public void Error_Phone_Empty()
         {
             //Arrange
-            var validator = new CreateContactValidator();
+            var validator = new ContactValidator();
             var request = RequestCreateContactJsonBuilder.Build();
-            request.ContactPhone = string.Empty;
+            request.Phone = string.Empty;
             //Act
             var result = validator.Validate(request);
             //Assert
@@ -59,9 +59,9 @@ namespace Validators.Tests.Contacts.Create
         public void Error_Email_Empty()
         {
             //Arrange
-            var validator = new CreateContactValidator();
+            var validator = new ContactValidator();
             var request = RequestCreateContactJsonBuilder.Build();
-            request.ContactEmail = string.Empty;
+            request.Email = string.Empty;
             //Act
             var result = validator.Validate(request);
             //Assert

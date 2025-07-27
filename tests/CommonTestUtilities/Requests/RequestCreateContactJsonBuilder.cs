@@ -5,12 +5,12 @@ namespace CommonTestUtilities.Requests
 {
     public class RequestCreateContactJsonBuilder
     {
-        public static RequestCreateContactJson Build()
+        public static RequestContactJson Build()
         {
-            return new Faker<RequestCreateContactJson>("pt_BR")
-                .RuleFor(c => c.ContactName, f => f.Person.FullName)
-                .RuleFor(c => c.ContactEmail, f => f.Internet.Email())
-                .RuleFor(c => c.ContactPhone, f => f.Phone.PhoneNumber("###########"));
+            return new Faker<RequestContactJson>("pt_BR")
+                .RuleFor(c => c.Name, f => f.Person.FullName)
+                .RuleFor(c => c.Email, f => f.Internet.Email())
+                .RuleFor(c => c.Phone, f => f.Phone.PhoneNumber("###########"));
         }
     }
 }
