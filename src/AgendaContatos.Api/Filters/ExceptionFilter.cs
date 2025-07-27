@@ -22,24 +22,10 @@ namespace AgendaContatos.Api.Filters
 
         private void HandleProjectException(ExceptionContext context)
         {
-            if (context.Exception is ErrorOnValidationException errorOnValidationEx)
-            {
-                var errorResponse = new ResponseErrorJson(errorOnValidationEx.Errors);
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new BadRequestObjectResult(errorResponse);
-            }
-            else if (context.Exception is ErrorOnValidationException notFoundEx)
-            {
-                var errorResponse = new ResponseErrorJson(notFoundEx.Message);
-                context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                context.Result = new NotFoundObjectResult(errorResponse);
-            }
-            else
-            {
-                var errorResponse = new ResponseErrorJson(context.Exception.Message);
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new BadRequestObjectResult(errorResponse);
-            }
+            var exception = context.Exception as AgendaContatosException;
+            var errorResponse = new ResponseErrorJson(exception!.GetErrors());
+            context.HttpContext.Response.StatusCode = exception.StatusCode;
+            context.Result = new ObjectResult(errorResponse);
         }
         private void ThrowUnknowError(ExceptionContext context)
         {
