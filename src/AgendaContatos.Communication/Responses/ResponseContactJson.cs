@@ -2,7 +2,7 @@
 
 namespace AgendaContatos.Communication.Responses
 {
-    public class ResponseContactJson : RequestCreateContactJson
+    public class ResponseContactJson : RequestContactJson
     {
         public long Id { get; set; }
         

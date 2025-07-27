@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgendaContatos.Infrastructure.DataAccess.Repositories
 {
-    internal class ContactsRespository : IContactsReadOnlyRepository, IContactsWriteOnlyRepository
+    internal class ContactsRespository : IContactsReadOnlyRepository, IContactsWriteOnlyRepository, IContactsUpdateOnlyRepository
     {
         private readonly AgendaContatosDbContext _dbContext;
         public ContactsRespository(AgendaContatosDbContext dbContext)
@@ -33,9 +33,19 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
             return await _dbContext.Contacts.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Contact?> GetById(long id)
+        async Task<Contact?> IContactsReadOnlyRepository.GetById(long id)
         {
             return await _dbContext.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        async Task<Contact?> IContactsUpdateOnlyRepository.GetById(long id)
+        {
+            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public void Update(Contact contact)
+        {
+            _dbContext.Contacts.Update(contact);
         }
     }
 }

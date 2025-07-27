@@ -22,6 +22,7 @@ namespace AgendaContatos.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IContactsReadOnlyRepository, ContactsRespository>();
             services.AddScoped<IContactsWriteOnlyRepository, ContactsRespository>();
+            services.AddScoped<IContactsUpdateOnlyRepository, ContactsRespository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

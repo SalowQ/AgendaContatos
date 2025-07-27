@@ -1,6 +1,6 @@
 ﻿namespace AgendaContatos.Communication.Requests
 {
-    public class RequestCreateContactJson
+    public class RequestContactJson
     {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

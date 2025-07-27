@@ -2,11 +2,11 @@
 using AgendaContatos.Exception;
 using FluentValidation;
 
-namespace AgendaContatos.Application.UseCases.Contacts.Create
+namespace AgendaContatos.Application.UseCases.Contacts
 {
-    public class CreateContactValidator: AbstractValidator<RequestCreateContactJson>
+    public class ContactValidator: AbstractValidator<RequestContactJson>
     {
-        public CreateContactValidator()
+        public ContactValidator()
         {
             RuleFor(contact => contact.Name)
                 .NotEmpty().WithMessage(ResourceErrorMessages.NAME_REQUIRED)

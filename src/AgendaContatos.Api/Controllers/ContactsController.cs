@@ -2,6 +2,7 @@
 using AgendaContatos.Application.UseCases.Contacts.Delete;
 using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
 using AgendaContatos.Application.UseCases.Contacts.GetContactById;
+using AgendaContatos.Application.UseCases.Contacts.Update;
 using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -16,7 +17,7 @@ namespace AgendaContatos.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseCreatedContactJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromServices] ICreateContactUseCase useCase, [FromBody] RequestCreateContactJson request)
+        public async Task<IActionResult> Create([FromServices] ICreateContactUseCase useCase, [FromBody] RequestContactJson request)
         {
                 var response = await useCase.Execute(request);
                 return Created(string.Empty, response);
@@ -43,7 +44,6 @@ namespace AgendaContatos.Api.Controllers
         {
             var response = await useCase.Execute(id);
             return Ok(response);
-
         }
 
         [HttpDelete]
@@ -54,7 +54,17 @@ namespace AgendaContatos.Api.Controllers
         {
             await useCase.Execute(id);
             return NoContent();
+        }
 
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update([FromServices] IUpdateContactUseCase useCase, [FromRoute] long id, [FromBody] RequestContactJson request)
+        {
+            await useCase.Execute(id, request);
+            return NoContent();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    public async Task<ResponseCreatedContactJson> Execute(RequestCreateContactJson request)
+    public async Task<ResponseCreatedContactJson> Execute(RequestContactJson request)
         {
             Validate(request);
             var entity = _mapper.Map<Contact>(request);
@@ -30,9 +30,9 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
         }
 
 
-    private void Validate(RequestCreateContactJson request)
+    private void Validate(RequestContactJson request)
     {
-        var validator = new CreateContactValidator();
+        var validator = new ContactValidator();
         var result = validator.Validate(request);
         if (result.IsValid == false)
         {
