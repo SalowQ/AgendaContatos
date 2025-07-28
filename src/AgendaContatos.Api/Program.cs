@@ -5,6 +5,16 @@ using AgendaContatos.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +38,9 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<CultureMiddleware>();
 
 app.UseHttpsRedirection();
+
+// Ativando CORS
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
