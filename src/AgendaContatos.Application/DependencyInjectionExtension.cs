@@ -4,6 +4,7 @@ using AgendaContatos.Application.UseCases.Contacts.Delete;
 using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
 using AgendaContatos.Application.UseCases.Contacts.GetContactById;
 using AgendaContatos.Application.UseCases.Contacts.Update;
+using AgendaContatos.Application.UseCases.Users.Create;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AgendaContatos.Application
@@ -28,6 +29,7 @@ namespace AgendaContatos.Application
             services.AddScoped<IGetContactByIdUseCase, GetContactByIdUseCase>();
             services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
             services.AddScoped<IUpdateContactUseCase, UpdateContactUseCase>();
+            services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         }
     }
 }

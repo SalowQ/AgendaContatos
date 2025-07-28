@@ -124,7 +124,7 @@
     <value>E-mail inválido.</value>
   </data>
   <data name="EMAIL_REQUIRED" xml:space="preserve">
-    <value>E-mail do contato é obrigatório.</value>
+    <value>E-mail é obrigatório.</value>
   </data>
   <data name="NAME_MAXIMUM" xml:space="preserve">
     <value>Nome deve ter no máximo 60 caracteres.</value>
@@ -133,7 +133,7 @@
     <value>Nome deve ter no mínimo 2 caracteres.</value>
   </data>
   <data name="NAME_REQUIRED" xml:space="preserve">
-    <value>Nome do contato é obrigatório.</value>
+    <value>Nome é obrigatório.</value>
   </data>
   <data name="PHONE_INVALID" xml:space="preserve">
     <value>Número de telefone inválido. Ex: (11) 91234-5678 ou (11) 3456-7890.</value>

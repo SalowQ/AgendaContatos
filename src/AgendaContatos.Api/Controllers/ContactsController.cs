@@ -5,7 +5,6 @@ using AgendaContatos.Application.UseCases.Contacts.GetContactById;
 using AgendaContatos.Application.UseCases.Contacts.Update;
 using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaContatos.Api.Controllers
