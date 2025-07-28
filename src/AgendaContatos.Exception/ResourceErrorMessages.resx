@@ -141,6 +141,24 @@
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>Nome é obrigatório.</value>
   </data>
+  <data name="PASSWORD_INVALID" xml:space="preserve">
+    <value>Senha precisa ser válida.</value>
+  </data>
+  <data name="PASSWORD_LENGTH" xml:space="preserve">
+    <value>Senha precisa ter no mínimo 8 dígitos.</value>
+  </data>
+  <data name="PASSWORD_LOWERCASE" xml:space="preserve">
+    <value>Senha precisa conter uma letra minúscula.</value>
+  </data>
+  <data name="PASSWORD_NUMBERS" xml:space="preserve">
+    <value>Senha precisa conter um número.</value>
+  </data>
+  <data name="PASSWORD_SYMBOLS" xml:space="preserve">
+    <value>Senha precisa conter ao menos um caractere especial.</value>
+  </data>
+  <data name="PASSWORD_UPPERCASE" xml:space="preserve">
+    <value>Senha precisa conter uma letra maiúscula.</value>
+  </data>
   <data name="PHONE_INVALID" xml:space="preserve">
     <value>Número de telefone inválido. Ex: (11) 91234-5678 ou (11) 3456-7890.</value>
   </data>

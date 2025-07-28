@@ -133,6 +133,60 @@ namespace AgendaContatos.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa ser válida..
+        /// </summary>
+        public static string PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa ter no mínimo 8 dígitos..
+        /// </summary>
+        public static string PASSWORD_LENGTH {
+            get {
+                return ResourceManager.GetString("PASSWORD_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa conter uma letra minúscula..
+        /// </summary>
+        public static string PASSWORD_LOWERCASE {
+            get {
+                return ResourceManager.GetString("PASSWORD_LOWERCASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa conter um número..
+        /// </summary>
+        public static string PASSWORD_NUMBERS {
+            get {
+                return ResourceManager.GetString("PASSWORD_NUMBERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa conter ao menos um caractere especial..
+        /// </summary>
+        public static string PASSWORD_SYMBOLS {
+            get {
+                return ResourceManager.GetString("PASSWORD_SYMBOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha precisa conter uma letra maiúscula..
+        /// </summary>
+        public static string PASSWORD_UPPERCASE {
+            get {
+                return ResourceManager.GetString("PASSWORD_UPPERCASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Número de telefone inválido. Ex: (11) 91234-5678 ou (11) 3456-7890..
         /// </summary>
         public static string PHONE_INVALID {
