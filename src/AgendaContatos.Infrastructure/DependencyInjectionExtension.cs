@@ -3,10 +3,12 @@ using AgendaContatos.Domain.Repositories.Contacts;
 using AgendaContatos.Domain.Repositories.Users;
 using AgendaContatos.Domain.Security.Cryptography;
 using AgendaContatos.Domain.Security.Tokens;
+using AgendaContatos.Domain.Services.LoggedUser;
 using AgendaContatos.Infrastructure.DataAccess;
 using AgendaContatos.Infrastructure.DataAccess.Repositories;
 using AgendaContatos.Infrastructure.Security.Crypto;
 using AgendaContatos.Infrastructure.Security.Tokens;
+using AgendaContatos.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,7 @@ namespace AgendaContatos.Infrastructure
             AddDbContext(services, configuration);
 
             services.AddScoped<IPasswordEncrypter, Cryptography>();
+            services.AddScoped<ILoggedUser, LoggedUser>();
         }
 
         private static void AddToken(IServiceCollection services, IConfiguration configuration)

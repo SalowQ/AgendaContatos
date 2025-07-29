@@ -1,6 +1,8 @@
 using AgendaContatos.Api.Filters;
 using AgendaContatos.Api.Middleware;
+using AgendaContatos.Api.Token;
 using AgendaContatos.Application;
+using AgendaContatos.Domain.Security.Tokens;
 using AgendaContatos.Infrastructure;
 using AgendaContatos.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -59,6 +61,9 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)))
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHttpContextAccessor();
 
 var signingKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey");
 
