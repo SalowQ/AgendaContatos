@@ -3,6 +3,7 @@ using AgendaContatos.Communication.Responses;
 using AgendaContatos.Domain.Entities;
 using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Contacts;
+using AgendaContatos.Domain.Services.LoggedUser;
 using AgendaContatos.Exception.ExceptionBase;
 using AutoMapper;
 
@@ -14,19 +15,23 @@ namespace AgendaContatos.Application.UseCases.Contacts.Create;
     private readonly IContactsWriteOnlyRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public CreateContactUseCase(IContactsWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly ILoggedUser _loggedUser;
+    public CreateContactUseCase(IContactsWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper, ILoggedUser loggedUser)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _loggedUser = loggedUser;
     }
     public async Task<ResponseCreatedContactJson> Execute(RequestContactJson request)
         {
             Validate(request);
-            var entity = _mapper.Map<Contact>(request);
-            await _repository.Add(entity);
+            var loggedUser = await _loggedUser.Get();
+            var contact = _mapper.Map<Contact>(request);
+            contact.UserId = loggedUser.Id;
+            await _repository.Add(contact);
             await _unitOfWork.Commit();
-            return _mapper.Map<ResponseCreatedContactJson>(entity);
+            return _mapper.Map<ResponseCreatedContactJson>(contact);
         }
 
 
