@@ -115,6 +115,15 @@ namespace AgendaContatos.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Credenciais inválidas..
+        /// </summary>
+        public static string LOGIN_INVALID {
+            get {
+                return ResourceManager.GetString("LOGIN_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Nome deve ter no máximo 60 caracteres..
         /// </summary>
         public static string NAME_MAXIMUM {

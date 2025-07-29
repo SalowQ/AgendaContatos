@@ -135,6 +135,9 @@
   <data name="EMAIL_REQUIRED" xml:space="preserve">
     <value>E-mail is required.</value>
   </data>
+  <data name="LOGIN_INVALID" xml:space="preserve">
+    <value>Invalid credentials.</value>
+  </data>
   <data name="NAME_MAXIMUM" xml:space="preserve">
     <value>Name must be at most 60 characters long.</value>
   </data>

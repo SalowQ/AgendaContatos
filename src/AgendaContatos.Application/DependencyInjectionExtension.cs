@@ -1,4 +1,5 @@
 ﻿using AgendaContatos.Application.AutoMapper;
+using AgendaContatos.Application.UseCases.Auth.Login;
 using AgendaContatos.Application.UseCases.Contacts.Create;
 using AgendaContatos.Application.UseCases.Contacts.Delete;
 using AgendaContatos.Application.UseCases.Contacts.GetAllContacts;
@@ -30,6 +31,7 @@ namespace AgendaContatos.Application
             services.AddScoped<IDeleteContactUseCase, DeleteContactUseCase>();
             services.AddScoped<IUpdateContactUseCase, UpdateContactUseCase>();
             services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+            services.AddScoped<ILoginUseCase, LoginUseCase>();
         }
     }
 }
