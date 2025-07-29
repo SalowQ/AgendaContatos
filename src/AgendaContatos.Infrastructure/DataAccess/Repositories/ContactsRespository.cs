@@ -17,30 +17,25 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
             await _dbContext.Contacts.AddAsync(contact);
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task Delete(long id)
         {
-            var result = await _dbContext.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
-            if (result == null)
-            {
-                return false;
-            }
-            _dbContext.Contacts.Remove(result);
-            return true;
+            var result = await _dbContext.Contacts.FindAsync(id);
+            _dbContext.Contacts.Remove(result!);
         }
 
-        public async Task<List<Contact>> GetAll()
+        public async Task<List<Contact>> GetAll(User user)
         {
-            return await _dbContext.Contacts.AsNoTracking().ToListAsync();
+            return await _dbContext.Contacts.AsNoTracking().Where(c => c.UserId == user.Id).ToListAsync();
         }
 
-        async Task<Contact?> IContactsReadOnlyRepository.GetById(long id)
+        async Task<Contact?> IContactsReadOnlyRepository.GetById(User user, long id)
         {
-            return await _dbContext.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+            return await _dbContext.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
         }
 
-        async Task<Contact?> IContactsUpdateOnlyRepository.GetById(long id)
+        async Task<Contact?> IContactsUpdateOnlyRepository.GetById(User user, long id)
         {
-            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
         }
 
         public void Update(Contact contact)

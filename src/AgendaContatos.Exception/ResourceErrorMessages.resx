@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CONFIRM_PASSWORD_INVALID" xml:space="preserve">
+    <value>As senhas precisam estar iguais.</value>
+  </data>
+  <data name="CONFIRM_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Confirmação de senha é obrigatória.</value>
+  </data>
   <data name="CONTACT_NOT_FOUND" xml:space="preserve">
     <value>Contato não encontrado.</value>
+  </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>E-mail já está cadastrado.</value>
   </data>
   <data name="EMAIL_INVALID" xml:space="preserve">
     <value>E-mail inválido.</value>
   </data>
   <data name="EMAIL_REQUIRED" xml:space="preserve">
     <value>E-mail é obrigatório.</value>
+  </data>
+  <data name="LOGIN_INVALID" xml:space="preserve">
+    <value>Credenciais inválidas.</value>
   </data>
   <data name="NAME_MAXIMUM" xml:space="preserve">
     <value>Nome deve ter no máximo 60 caracteres.</value>
@@ -134,6 +146,24 @@
   </data>
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>Nome é obrigatório.</value>
+  </data>
+  <data name="PASSWORD_INVALID" xml:space="preserve">
+    <value>Senha precisa ser válida.</value>
+  </data>
+  <data name="PASSWORD_LENGTH" xml:space="preserve">
+    <value>Senha precisa ter no mínimo 8 dígitos.</value>
+  </data>
+  <data name="PASSWORD_LOWERCASE" xml:space="preserve">
+    <value>Senha precisa conter uma letra minúscula.</value>
+  </data>
+  <data name="PASSWORD_NUMBERS" xml:space="preserve">
+    <value>Senha precisa conter um número.</value>
+  </data>
+  <data name="PASSWORD_SYMBOLS" xml:space="preserve">
+    <value>Senha precisa conter ao menos um caractere especial.</value>
+  </data>
+  <data name="PASSWORD_UPPERCASE" xml:space="preserve">
+    <value>Senha precisa conter uma letra maiúscula.</value>
   </data>
   <data name="PHONE_INVALID" xml:space="preserve">
     <value>Número de telefone inválido. Ex: (11) 91234-5678 ou (11) 3456-7890.</value>

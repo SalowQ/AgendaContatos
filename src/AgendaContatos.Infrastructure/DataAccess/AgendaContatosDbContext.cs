@@ -7,5 +7,6 @@ namespace AgendaContatos.Infrastructure.DataAccess
     {
         public AgendaContatosDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -16,6 +16,11 @@ namespace AgendaContatos.Application.UseCases.Users.Create
                 .WithMessage(ResourceErrorMessages.EMAIL_INVALID);
 
             RuleFor(user => user.Password).SetValidator(new PasswordValidator<RequestCreateUserJson>());
+            RuleFor(user => user.ConfirmPassword)
+                .NotEmpty()
+                .WithMessage(ResourceErrorMessages.CONFIRM_PASSWORD_REQUIRED)
+                .Equal(user => user.Password)
+                .WithMessage(ResourceErrorMessages.CONFIRM_PASSWORD_INVALID);
         }
     }
 }

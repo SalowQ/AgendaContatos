@@ -5,12 +5,14 @@ using AgendaContatos.Application.UseCases.Contacts.GetContactById;
 using AgendaContatos.Application.UseCases.Contacts.Update;
 using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaContatos.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ContactsController : ControllerBase
     {
         [HttpPost]
