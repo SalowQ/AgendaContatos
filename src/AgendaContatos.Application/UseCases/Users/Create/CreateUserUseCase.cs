@@ -3,6 +3,7 @@ using AgendaContatos.Communication.Responses;
 using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Users;
 using AgendaContatos.Domain.Security.Cryptography;
+using AgendaContatos.Domain.Security.Tokens;
 using AgendaContatos.Exception;
 using AgendaContatos.Exception.ExceptionBase;
 using AutoMapper;
@@ -16,14 +17,16 @@ namespace AgendaContatos.Application.UseCases.Users.Create
         private readonly IPasswordEncrypter _passwordEncrypter;
         private readonly IUsersReadOnlyRepository _usersReadOnlyRepository;
         private readonly IUsersWriteOnlyRepository _usersWriteOnlyRepository;
+        private readonly IAccessTokenGenerator _accessTokenGenerator;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter, IUsersReadOnlyRepository usersReadOnlyRepository, IUsersWriteOnlyRepository usersWriteOnlyRepository, IUnitOfWork unitOfWork)
+        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter, IUsersReadOnlyRepository usersReadOnlyRepository, IUsersWriteOnlyRepository usersWriteOnlyRepository, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
         {
             _mapper = mapper;
             _passwordEncrypter = passwordEncrypter;
             _usersReadOnlyRepository = usersReadOnlyRepository;
             _usersWriteOnlyRepository = usersWriteOnlyRepository;
+            _accessTokenGenerator = accessTokenGenerator;
             _unitOfWork = unitOfWork;
         }
 
@@ -41,6 +44,7 @@ namespace AgendaContatos.Application.UseCases.Users.Create
             return new ResponseCreatedUserJson
             {
                 Name = user.Name,
+                Token = _accessTokenGenerator.Generate(user),
             };
         }
 

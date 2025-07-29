@@ -1,6 +1,6 @@
 ﻿using AgendaContatos.Domain.Security.Cryptography;
 
-namespace AgendaContatos.Infrastructure.Security
+namespace AgendaContatos.Infrastructure.Security.Crypto
 {
     public class Cryptography : IPasswordEncrypter
     {
