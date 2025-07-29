@@ -1,8 +1,11 @@
 ﻿using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
+using AgendaContatos.Domain.Repositories.Users;
 using AgendaContatos.Domain.Security.Cryptography;
+using AgendaContatos.Exception;
 using AgendaContatos.Exception.ExceptionBase;
 using AutoMapper;
+using FluentValidation.Results;
 
 namespace AgendaContatos.Application.UseCases.Users.Create
 {
@@ -10,16 +13,18 @@ namespace AgendaContatos.Application.UseCases.Users.Create
     {
         private readonly IMapper _mapper;
         private readonly IPasswordEncrypter _passwordEncrypter;
+        private readonly IUsersReadOnlyRepository _usersReadOnlyRepository;
 
-        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter)
+        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter, IUsersReadOnlyRepository usersReadOnlyRepository)
         {
             _mapper = mapper;
             _passwordEncrypter = passwordEncrypter;
+            _usersReadOnlyRepository = usersReadOnlyRepository;
         }
 
         public async Task<ResponseCreatedUserJson> Execute(RequestCreateUserJson request)
         {
-            Validate(request);
+            await Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
             user.Password = _passwordEncrypter.Encrypt(request.Password);
@@ -30,9 +35,15 @@ namespace AgendaContatos.Application.UseCases.Users.Create
             };
         }
 
-        private void Validate(RequestCreateUserJson request)
+        private async Task Validate(RequestCreateUserJson request)
         {
             var result = new CreateUserValidator().Validate(request);
+
+            var emailExists = await _usersReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
+            if (emailExists)
+            {
+                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
+            }
 
             if (result.IsValid == false)
             {

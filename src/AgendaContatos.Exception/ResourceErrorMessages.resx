@@ -126,6 +126,9 @@
   <data name="CONTACT_NOT_FOUND" xml:space="preserve">
     <value>Contato não encontrado.</value>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>E-mail já está cadastrado.</value>
+  </data>
   <data name="EMAIL_INVALID" xml:space="preserve">
     <value>E-mail inválido.</value>
   </data>

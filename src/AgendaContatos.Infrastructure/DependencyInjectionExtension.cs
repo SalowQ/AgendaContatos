@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Contacts;
+using AgendaContatos.Domain.Repositories.Users;
 using AgendaContatos.Domain.Security.Cryptography;
 using AgendaContatos.Infrastructure.DataAccess;
 using AgendaContatos.Infrastructure.DataAccess.Repositories;
@@ -27,6 +28,7 @@ namespace AgendaContatos.Infrastructure
             services.AddScoped<IContactsReadOnlyRepository, ContactsRespository>();
             services.AddScoped<IContactsWriteOnlyRepository, ContactsRespository>();
             services.AddScoped<IContactsUpdateOnlyRepository, ContactsRespository>();
+            services.AddScoped<IUsersReadOnlyRepository, UsersRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
