@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
+using AgendaContatos.Domain.Security.Cryptography;
 using AgendaContatos.Exception.ExceptionBase;
 using AutoMapper;
 
@@ -8,10 +9,12 @@ namespace AgendaContatos.Application.UseCases.Users.Create
     public class CreateUserUseCase : ICreateUserUseCase
     {
         private readonly IMapper _mapper;
+        private readonly IPasswordEncrypter _passwordEncrypter;
 
-        public CreateUserUseCase(IMapper mapper)
+        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter)
         {
             _mapper = mapper;
+            _passwordEncrypter = passwordEncrypter;
         }
 
         public async Task<ResponseCreatedUserJson> Execute(RequestCreateUserJson request)
@@ -19,6 +22,7 @@ namespace AgendaContatos.Application.UseCases.Users.Create
             Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
+            user.Password = _passwordEncrypter.Encrypt(request.Password);
 
             return new ResponseCreatedUserJson
             {

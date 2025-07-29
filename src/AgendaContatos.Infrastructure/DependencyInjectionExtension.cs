@@ -1,7 +1,9 @@
 ﻿using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Contacts;
+using AgendaContatos.Domain.Security.Cryptography;
 using AgendaContatos.Infrastructure.DataAccess;
 using AgendaContatos.Infrastructure.DataAccess.Repositories;
+using AgendaContatos.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,8 @@ namespace AgendaContatos.Infrastructure
         {
             AddRepositories(services);
             AddDbContext(services, configuration);
+
+            services.AddScoped<IPasswordEncrypter, Cryptography>();
         }
 
         private static void AddRepositories(IServiceCollection services)
