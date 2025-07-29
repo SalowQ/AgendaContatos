@@ -2,6 +2,22 @@
 
 API REST para gerenciamento de contatos desenvolvida em .NET 8 com clean architecture.
 
+## 🌐 Frontend
+
+Este projeto possui um frontend complementar desenvolvido em Vue.js:
+
+- **Repositório**: [AgendaContatosFront](https://github.com/SalowQ/AgendaContatosFront)
+- **Deploy**: [agenda-contatos-front.vercel.app](https://agenda-contatos-front.vercel.app/)
+
+### ⚠️ Configuração do Frontend
+
+O frontend está configurado para apontar para a API local (`https://localhost:7289`). Para usar o frontend em produção com o backend local:
+
+1. **Execute o backend localmente** (seguindo os passos abaixo)
+2. **Acesse o frontend**: [agenda-contatos-front.vercel.app](https://agenda-contatos-front.vercel.app/)
+
+> **Nota**: O backend não está configurado para deploy, então o frontend em produção só funcionará com o backend rodando localmente.
+
 ## 📋 Descrição
 
 Sistema de agenda de contatos que permite realizar operações CRUD (Create, Read, Update, Delete) em contatos através de uma API REST.
@@ -155,7 +171,17 @@ services.AddDbContext<AgendaContatosDbContext>(config =>
    ```
 
 6. **Acesse a documentação**
-   - Swagger UI: `https://localhost:7000/swagger`
+   - Swagger UI: `https://localhost:7289/swagger`
+
+### 🚀 Usando com o Frontend
+
+Para usar a aplicação completa com frontend e backend:
+
+1. **Backend local**: Execute os passos acima para rodar a API
+2. **Frontend em produção**: Acesse [agenda-contatos-front.vercel.app](https://agenda-contatos-front.vercel.app/)
+3. **Desenvolvimento local**: Clone o [repositório do frontend](https://github.com/SalowQ/AgendaContatosFront) e execute `npm run dev`
+
+> **💡 Dica**: O frontend em produção já está configurado para apontar para `https://localhost:7289`, então funcionará automaticamente com seu backend local.
 
 ## 🧪 Testes
 
@@ -202,6 +228,22 @@ dotnet test --collect:"XPlat Code Coverage"
 - **HTTPS** redirection habilitado
 - **Swagger** disponível apenas em ambiente de desenvolvimento
 - **URLs em lowercase** para padronização
+
+### 🌐 Configuração CORS para Frontend
+
+Para permitir que o frontend em produção acesse o backend local, o CORS já está configurado para aceitar todas as origens. Se precisar de uma configuração mais específica, você pode modificar o CORS no `Program.cs`:
+
+```csharp
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+```
 
 ## 📝 Licença
 
