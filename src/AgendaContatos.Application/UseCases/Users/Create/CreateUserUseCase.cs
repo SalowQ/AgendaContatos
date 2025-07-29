@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Communication.Requests;
 using AgendaContatos.Communication.Responses;
+using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Users;
 using AgendaContatos.Domain.Security.Cryptography;
 using AgendaContatos.Exception;
@@ -14,12 +15,16 @@ namespace AgendaContatos.Application.UseCases.Users.Create
         private readonly IMapper _mapper;
         private readonly IPasswordEncrypter _passwordEncrypter;
         private readonly IUsersReadOnlyRepository _usersReadOnlyRepository;
+        private readonly IUsersWriteOnlyRepository _usersWriteOnlyRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter, IUsersReadOnlyRepository usersReadOnlyRepository)
+        public CreateUserUseCase(IMapper mapper, IPasswordEncrypter passwordEncrypter, IUsersReadOnlyRepository usersReadOnlyRepository, IUsersWriteOnlyRepository usersWriteOnlyRepository, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _passwordEncrypter = passwordEncrypter;
             _usersReadOnlyRepository = usersReadOnlyRepository;
+            _usersWriteOnlyRepository = usersWriteOnlyRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseCreatedUserJson> Execute(RequestCreateUserJson request)
@@ -28,6 +33,10 @@ namespace AgendaContatos.Application.UseCases.Users.Create
 
             var user = _mapper.Map<Domain.Entities.User>(request);
             user.Password = _passwordEncrypter.Encrypt(request.Password);
+            user.UserIdentifier = Guid.NewGuid();
+
+            await _usersWriteOnlyRepository.Add(user);
+            await _unitOfWork.Commit();
 
             return new ResponseCreatedUserJson
             {
