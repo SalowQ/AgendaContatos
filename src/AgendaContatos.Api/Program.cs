@@ -5,6 +5,7 @@ using AgendaContatos.Infrastructure;
 using AgendaContatos.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,37 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(config =>
+{
+    config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = @"Autorização JWT usando Bearer.
+                        Digite 'Bearer' seguido de um espaço e, em seguida, o seu token no campo de texto abaixo.
+                        Exemplo: 'Bearer 12345abcdef''",
+        In = ParameterLocation.Header,
+        Scheme = "Bearer",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    config.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
