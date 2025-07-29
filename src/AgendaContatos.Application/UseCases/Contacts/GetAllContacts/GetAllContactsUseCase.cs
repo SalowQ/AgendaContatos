@@ -1,5 +1,6 @@
 ﻿using AgendaContatos.Communication.Responses;
 using AgendaContatos.Domain.Repositories.Contacts;
+using AgendaContatos.Domain.Services.LoggedUser;
 using AutoMapper;
 
 namespace AgendaContatos.Application.UseCases.Contacts.GetAllContacts
@@ -8,16 +9,19 @@ namespace AgendaContatos.Application.UseCases.Contacts.GetAllContacts
     {
         private readonly IContactsReadOnlyRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ILoggedUser _loggedUser;
 
-        public GetAllContactsUseCase(IContactsReadOnlyRepository repository, IMapper mapper)
+        public GetAllContactsUseCase(IContactsReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
         {
             _repository = repository;
             _mapper = mapper;
+            _loggedUser = loggedUser;
         }
 
         public async Task<ResponseContactsListJson> Execute()
         {
-            var result = await _repository.GetAll();
+            var loggedUser = await _loggedUser.Get();
+            var result = await _repository.GetAll(loggedUser);
 
             return new ResponseContactsListJson
             {

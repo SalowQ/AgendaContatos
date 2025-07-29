@@ -23,9 +23,9 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
             _dbContext.Contacts.Remove(result!);
         }
 
-        public async Task<List<Contact>> GetAll()
+        public async Task<List<Contact>> GetAll(User user)
         {
-            return await _dbContext.Contacts.AsNoTracking().ToListAsync();
+            return await _dbContext.Contacts.AsNoTracking().Where(c => c.UserId == user.Id).ToListAsync();
         }
 
         async Task<Contact?> IContactsReadOnlyRepository.GetById(User user, long id)
