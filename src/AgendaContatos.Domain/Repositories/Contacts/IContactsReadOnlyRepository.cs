@@ -5,6 +5,6 @@ namespace AgendaContatos.Domain.Repositories.Contacts
     public interface IContactsReadOnlyRepository
     {
         Task<List<Contact>> GetAll();
-        Task<Contact?> GetById(long id);
+        Task<Contact?> GetById(Entities.User user, long id);
     }
 }
