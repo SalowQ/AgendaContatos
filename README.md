@@ -142,25 +142,19 @@ services.AddDbContext<AgendaContatosDbContext>(config =>
    dotnet tool install --global dotnet-ef
    ```
 
-4. **Crie as migrations (primeira execução)**
-
-   ```bash
-   dotnet ef migrations add InitialCreate --project src/AgendaContatos.Infrastructure
-   ```
-
-5. **Execute as migrações**
+4. **Execute as migrações**
 
    ```bash
    dotnet ef database update --project src/AgendaContatos.Infrastructure
    ```
 
-6. **Execute a aplicação**
+5. **Execute a aplicação**
 
    ```bash
    dotnet run --project src/AgendaContatos.Api
    ```
 
-7. **Acesse a documentação**
+6. **Acesse a documentação**
    - Swagger UI: `https://localhost:7000/swagger`
 
 ## 🧪 Testes
