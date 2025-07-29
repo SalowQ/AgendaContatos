@@ -38,9 +38,9 @@ namespace AgendaContatos.Infrastructure.DataAccess.Repositories
             return await _dbContext.Contacts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        async Task<Contact?> IContactsUpdateOnlyRepository.GetById(long id)
+        async Task<Contact?> IContactsUpdateOnlyRepository.GetById(User user, long id)
         {
-            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == id);
+            return await _dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
         }
 
         public void Update(Contact contact)

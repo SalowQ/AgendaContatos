@@ -1,6 +1,7 @@
 ﻿using AgendaContatos.Communication.Requests;
 using AgendaContatos.Domain.Repositories;
 using AgendaContatos.Domain.Repositories.Contacts;
+using AgendaContatos.Domain.Services.LoggedUser;
 using AgendaContatos.Exception;
 using AgendaContatos.Exception.ExceptionBase;
 using AutoMapper;
@@ -12,16 +13,19 @@ namespace AgendaContatos.Application.UseCases.Contacts.Update
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IContactsUpdateOnlyRepository _repository;
-        public UpdateContactUseCase(IMapper mapper, IUnitOfWork unitOfWork, IContactsUpdateOnlyRepository repository)
+        private readonly ILoggedUser _loggedUser;
+        public UpdateContactUseCase(IMapper mapper, IUnitOfWork unitOfWork, IContactsUpdateOnlyRepository repository, ILoggedUser loggedUser)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _repository = repository;
+            _loggedUser = loggedUser;
         }
         public async Task Execute(long id, RequestContactJson request)
         {
             Validate(request);
-            var contact = await _repository.GetById(id);
+            var loggedUser = await _loggedUser.Get();
+            var contact = await _repository.GetById(loggedUser, id);
             if (contact == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.CONTACT_NOT_FOUND);
